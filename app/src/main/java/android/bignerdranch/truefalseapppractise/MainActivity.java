@@ -55,7 +55,16 @@ public class MainActivity extends AppCompatActivity {
         /**
          * connecting layout buttons to the logic
          * */
+
+        //when user clicks to the text it will go to next question
         mQuestionTextView = (TextView) findViewById(R.id.question);
+        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
+                updateQuestion();
+            }
+        });
         mTrueButton = findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         // Sets click listeners on the True and False buttons.
         // Passes the user's selected answer to checkAnswer() for validation.
 
-        //previous button logic
+        //next button logic
         mNextButton = (Button) findViewById(R.id.nextbutton);
        mNextButton.setOnClickListener(new View.OnClickListener() {
            @Override
@@ -83,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
            }
        });
 
-       //next button logic
+       //prev button logic
        mPrevButton = (Button) findViewById(R.id.prevbutton);
        mPrevButton.setOnClickListener(new View.OnClickListener() {
            @Override
