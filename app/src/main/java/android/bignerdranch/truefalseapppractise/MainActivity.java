@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     }
     /**
      * checks user answer
-     * prints toaast message according to the user answer*/
+     * prints toast message according to the user answer*/
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismAnswerTrue();
         int messageResId = 0;
