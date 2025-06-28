@@ -8,7 +8,7 @@
     <string name="next_button">Next</string>
 
     <!-- questions-->
-    <string name="question_1">Tashkent is the capital city of Uzbekistan</string>
+    <string name="question_1">Tashkent is the capital city of Uzbekistan? </string>
     <string name="question_2">Sep. 1, 1991 is Independence day</string>
     <string name="question_3">Uzbekistan has 5 neighboring countries</string>
     <string name="question_4">Uzbekistan is landlocked country</string>
