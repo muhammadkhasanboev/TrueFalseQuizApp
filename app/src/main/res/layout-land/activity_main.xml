@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main">
+
+    <!-- Question Text -->
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:paddingTop="40dp"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <!-- True/False Buttons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp">
+
+        <Button
+            android:id="@+id/true_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="@string/true_button" />
+
+        <Button
+            android:id="@+id/false_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/false_button" />
+    </LinearLayout>
+
+    <!-- Prev/Next Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/prevbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/prev_button"
+            android:drawableLeft="@drawable/outline_arrow_back_ios_24"
+            android:drawablePadding="4dp"
+            android:layout_gravity="center_vertical" />
+
+        <Button
+            android:id="@+id/nextbutton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/next_button"
+            android:drawableEnd="@drawable/outline_arrow_forward_ios_24"
+            android:drawablePadding="4dp"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+</FrameLayout>

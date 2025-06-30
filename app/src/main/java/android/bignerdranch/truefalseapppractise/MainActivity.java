@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mTrueButton, mFalseButton, mNextButton, mPrevButton;
     private TextView mQuestionTextView;
     private int mCurrentIndex=0;
+    private static final String KEY_INDEX = "index";
 
     /**
      * takes resource id and based on that resource id displays questions on string.xml
@@ -46,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);}
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -103,6 +106,12 @@ public class MainActivity extends AppCompatActivity {
        });
         updateQuestion();
     }
+
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i("MainActivity", "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);}
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_1, true),
             new Question(R.string.question_2, false),
