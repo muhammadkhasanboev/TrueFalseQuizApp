@@ -13,4 +13,10 @@
     <string name="question_3">Uzbekistan has 5 neighboring countries</string>
     <string name="question_4">Uzbekistan is landlocked country</string>
     <string name="question_5">Uzbekistan has access to the Ocean</string>
+
+    <!-- cheat activity -->
+    <string name="warning_text">Are you sure you want to do this?</string>
+    <string name="show_answer_button">Show Answer</string>
+    <string name="cheat_button">Cheat!</string>
+    <string name="judgement_toast">Cheating is not good man!</string>
 </resources>
