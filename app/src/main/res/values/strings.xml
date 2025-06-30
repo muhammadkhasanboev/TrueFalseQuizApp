@@ -19,4 +19,6 @@
     <string name="show_answer_button">Show Answer</string>
     <string name="cheat_button">Cheat!</string>
     <string name="judgement_toast">Cheating is not good man!</string>
+    <string name="title_activity_cheat">Cheat</string>
+
 </resources>
