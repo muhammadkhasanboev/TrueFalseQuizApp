@@ -20,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
     private int mCurrentIndex=0;
     private static final String KEY_INDEX = "index";
 
+    private Button mCheatButton;
+
     /**
      * takes resource id and based on that resource id displays questions on string.xml
      * mQuestionBank is object of Question.java and it initialized as array
@@ -104,6 +106,14 @@ public class MainActivity extends AppCompatActivity {
                updateQuestion();
            }
        });
+
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         updateQuestion();
     }
 
