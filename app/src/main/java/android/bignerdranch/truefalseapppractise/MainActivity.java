@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
     private Button mCheatButton;
+    private static final int REQUEST_CODE_CHEAT = 0;
+    private boolean mIsCheater;
 
     /**
      * takes resource id and based on that resource id displays questions on string.xml
@@ -112,8 +114,10 @@ public class MainActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, CheatActivity.class);
-                startActivity(i);
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismAnswerTrue();
+                Intent i = CheatActivity.newIntent(MainActivity.this, answerIsTrue);
+                startActivityForResult(i, REQUEST_CODE_CHEAT);
+
             }
         });
         updateQuestion();
