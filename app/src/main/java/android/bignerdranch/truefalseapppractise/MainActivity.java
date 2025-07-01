@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
             mQuestionTextView.setText("Quiz is finished! \n Your score is "+score+"/"+mQuestionBank.length);
             mTrueButton.setVisibility(View.INVISIBLE);
             mFalseButton.setVisibility(View.INVISIBLE);
+            mCheatButton.setVisibility(View.INVISIBLE);
         }
     }
 
