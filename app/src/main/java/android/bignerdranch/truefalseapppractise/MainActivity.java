@@ -1,5 +1,6 @@
 package android.bignerdranch.truefalseapppractise;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private Button mCheatButton;
     private static final int REQUEST_CODE_CHEAT = 0;
     private boolean mIsCheater;
+    private int score = 0;
 
     /**
      * takes resource id and based on that resource id displays questions on string.xml
@@ -31,21 +33,18 @@ public class MainActivity extends AppCompatActivity {
      * question variable taking resource id by .getTextResId() method on Question.java
      * */
     private void updateQuestion(){
-        int question = mQuestionBank[mCurrentIndex].getTextResId();
-        mQuestionTextView.setText(question);
+        if(mCurrentIndex<mQuestionBank.length){
+            int question = mQuestionBank[mCurrentIndex].getTextResId();
+            mQuestionTextView.setText(question);
+            updatePrevButtonVisibility();
+        }
+        else{
+            mQuestionTextView.setText("Quiz is finished! \n Your score is "+score+"/"+mQuestionBank.length);
+            mTrueButton.setVisibility(View.INVISIBLE);
+            mFalseButton.setVisibility(View.INVISIBLE);
+        }
     }
-    /**
-     * checks user answer
-     * prints toast message according to the user answer*/
-    private void checkAnswer(boolean userPressedTrue) {
-        boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismAnswerTrue();
-        int messageResId = 0;
-        if (userPressedTrue == answerIsTrue) {
-            messageResId = R.string.correct_toast;
-        } else {
-            messageResId = R.string.incorrect_toast;}
-        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,22 +68,34 @@ public class MainActivity extends AppCompatActivity {
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-                updateQuestion();
+                if (mCurrentIndex < mQuestionBank.length){
+                    mCurrentIndex++;
+                    mTrueButton.setEnabled(true);
+                    mFalseButton.setEnabled(true);
+                    updateQuestion();
+                }
             }
         });
         mTrueButton = findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(true);
+                if (mCurrentIndex < mQuestionBank.length) {
+                    checkAnswer(true);
+                    mCurrentIndex++;
+                    updateQuestion();
+                }
             }
         });
         mFalseButton = findViewById(R.id.false_button);
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               checkAnswer(false);
+                if (mCurrentIndex < mQuestionBank.length) {
+                    checkAnswer(false);
+                    mCurrentIndex++;
+                    updateQuestion();
+                }
             }
         });
         // Sets click listeners on the True and False buttons.
@@ -95,8 +106,12 @@ public class MainActivity extends AppCompatActivity {
        mNextButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               mCurrentIndex = (mCurrentIndex + 1) % mQuestionBank.length;
-               updateQuestion();
+               if (mCurrentIndex < mQuestionBank.length){
+                   mCurrentIndex++;
+                   mTrueButton.setEnabled(true);
+                   mFalseButton.setEnabled(true);
+                   updateQuestion();
+               }
            }
        });
 
@@ -105,11 +120,14 @@ public class MainActivity extends AppCompatActivity {
        mPrevButton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               mCurrentIndex = (mCurrentIndex - 1 + mQuestionBank.length) % mQuestionBank.length;
-               updateQuestion();
+              mTrueButton.setEnabled(false);
+              mFalseButton.setEnabled(false);
+              mCurrentIndex--;
+              updateQuestion();
            }
        });
 
+       //cheat button
         mCheatButton = (Button) findViewById(R.id.cheat_button);
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,10 +141,24 @@ public class MainActivity extends AppCompatActivity {
         updateQuestion();
     }
 
+    /**
+     * checks user answer
+     * prints toast message according to the user answer*/
+    private void checkAnswer(boolean userPressedTrue) {
+        boolean answerIsTrue = mQuestionBank[mCurrentIndex].ismAnswerTrue();
+        int messageResId = 0;
+        if (userPressedTrue == answerIsTrue) {
+            messageResId = R.string.correct_toast;
+            score++;
+        } else {
+            messageResId = R.string.incorrect_toast;}
+        Toast.makeText(this, messageResId, Toast.LENGTH_SHORT).show();
+    }
+
+
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        Log.i("MainActivity", "onSaveInstanceState");
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);}
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_1, true),
@@ -135,4 +167,14 @@ public class MainActivity extends AppCompatActivity {
             new Question(R.string.question_4, true),
             new Question(R.string.question_5, false)
     };
+
+    private void updatePrevButtonVisibility() {
+        if (mCurrentIndex == 0) {
+            mPrevButton.setVisibility(View.INVISIBLE); // or .setEnabled(false)
+        } else {
+            mPrevButton.setVisibility(View.VISIBLE);  // or .setEnabled(true)
+        }
+    }
+
+
 }
